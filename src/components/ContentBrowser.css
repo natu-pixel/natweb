@@ -1,0 +1,187 @@
+/* ── Tabs ──────────────────────────────────── */
+.cbrowser__tabs {
+  display: flex;
+  gap: var(--space-sm);
+  flex-wrap: wrap;
+  margin-bottom: var(--space-xl);
+}
+
+.cbrowser__tab {
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  font-size: 0.88rem;
+  font-weight: 500;
+  color: var(--color-text-muted);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  font-family: var(--font-body);
+}
+
+.cbrowser__tab:hover {
+  color: var(--color-text-primary);
+  border-color: var(--color-border-hover);
+}
+
+.cbrowser__tab--active {
+  background: var(--grad-purple);
+  color: #fff;
+  border-color: transparent;
+  box-shadow: 0 4px 16px rgba(229, 9, 20, 0.35);
+}
+
+/* ── Grid ──────────────────────────────────── */
+.cbrowser__grid {
+  display: grid;
+  grid-template-columns: repeat(6, 1fr);
+  gap: var(--space-md);
+  animation: fadeIn 0.4s ease;
+}
+
+@media (max-width: 1200px) { .cbrowser__grid { grid-template-columns: repeat(5, 1fr); } }
+@media (max-width: 960px)  { .cbrowser__grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 700px)  { .cbrowser__grid { grid-template-columns: repeat(3, 1fr); } }
+@media (max-width: 480px)  { .cbrowser__grid { grid-template-columns: repeat(2, 1fr); } }
+
+/* ── Card ──────────────────────────────────── */
+.cbrowser__card {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  cursor: pointer;
+}
+
+.cbrowser__card-img-wrap {
+  position: relative;
+  aspect-ratio: 2/3;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: var(--color-surface-2);
+}
+
+.cbrowser__card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.cbrowser__card:hover .cbrowser__card-img {
+  transform: scale(1.06);
+}
+
+.cbrowser__card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(10,10,15,0.9) 0%,
+    transparent 50%
+  );
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 10px 8px;
+  gap: 5px;
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.cbrowser__card:hover .cbrowser__card-overlay {
+  opacity: 1;
+}
+
+.cbrowser__card-rating {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: #F0CE6A;
+}
+
+.cbrowser__card-meta-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  margin-bottom: 2px;
+}
+
+.cbrowser__card-res {
+  font-family: var(--font-mono);
+  font-size: 0.58rem;
+  font-weight: 700;
+  color: var(--color-text-body);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 2px 5px;
+  border-radius: 4px;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+.cbrowser__card-type {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 8px;
+  border-radius: var(--radius-pill);
+  align-self: flex-start;
+}
+
+.cbrowser__card-type--movie {
+  background: rgba(229, 9, 20, 0.85);
+  color: #fff;
+}
+
+.cbrowser__card-type--tv {
+  background: rgba(197, 198, 199, 0.25);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.cbrowser__card-title {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--color-text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: color var(--transition-fast);
+}
+
+.cbrowser__card:hover .cbrowser__card-title {
+  color: var(--color-text-primary);
+}
+
+.cbrowser__card-year {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  color: var(--color-text-muted);
+  letter-spacing: 0.05em;
+}
+
+/* ── Skeleton ──────────────────────────────── */
+.cbrowser__grid--loading .cbrowser__skeleton {
+  aspect-ratio: 2/3;
+  border-radius: var(--radius-md);
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 25%,
+    var(--color-surface-2) 50%,
+    var(--color-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ── Note ──────────────────────────────────── */
+.cbrowser__note {
+  margin-top: var(--space-lg);
+  text-align: center;
+  font-size: 0.75rem;
+  color: var(--color-text-muted);
+  line-height: 1.5;
+}

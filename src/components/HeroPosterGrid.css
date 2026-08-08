@@ -1,0 +1,92 @@
+.hero-grid {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(3, 130px);
+  grid-template-rows: repeat(3, 195px);
+  gap: 10px;
+  /* stagger rows offset */
+  transform: perspective(900px) rotateY(-8deg) rotateX(3deg);
+  transform-style: preserve-3d;
+  flex-shrink: 0;
+}
+
+/* ── Individual posters ───────────────────── */
+.hero-grid__poster {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+  animation: heroFloat calc(4s + calc(var(--i) * 0.5s)) ease-in-out infinite alternate;
+}
+
+.hero-grid__poster img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.hero-grid__poster:hover img {
+  transform: scale(1.05);
+}
+
+/* Stagger vertical offsets to look natural */
+.hero-grid__poster--0 { margin-top:  0px;  }
+.hero-grid__poster--1 { margin-top: 20px;  }
+.hero-grid__poster--2 { margin-top: -10px; }
+.hero-grid__poster--3 { margin-top: 10px;  }
+.hero-grid__poster--4 { margin-top: -20px; }
+.hero-grid__poster--5 { margin-top: 5px;   }
+.hero-grid__poster--6 { margin-top: 15px;  }
+.hero-grid__poster--7 { margin-top: -15px; }
+.hero-grid__poster--8 { margin-top: 0px;   }
+
+@keyframes heroFloat {
+  from { transform: translateY(0px);   }
+  to   { transform: translateY(-10px); }
+}
+
+/* Rating badge */
+.hero-grid__rating {
+  position: absolute;
+  bottom: 8px;
+  right: 8px;
+  background: rgba(229, 9, 20, 0.95);
+  color: #FFFFFF;
+  font-size: 0.62rem;
+  font-weight: 800;
+  padding: 3px 7px;
+  border-radius: 6px;
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(4px);
+}
+
+/* Left edge fade so text stays readable */
+.hero-grid__fade {
+  position: absolute;
+  top: 0; left: -1px; bottom: 0;
+  width: 80px;
+  background: linear-gradient(to right, var(--color-bg), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* ── Skeleton ─────────────────────────────── */
+.hero-grid--loading .hero-grid__skeleton {
+  border-radius: 10px;
+  background: linear-gradient(
+    90deg,
+    var(--color-surface) 25%,
+    var(--color-surface-2) 50%,
+    var(--color-surface) 75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.8s ease-in-out infinite;
+}
+
+/* ── Responsive: hide on small screens ───── */
+@media (max-width: 900px) {
+  .hero-grid { display: none; }
+}
