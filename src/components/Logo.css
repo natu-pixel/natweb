@@ -1,0 +1,24 @@
+.logo { display: inline-flex; align-items: center; gap: 11px; color: #fff; line-height: 1; }
+.logo-mark { width: 36px; height: 36px; flex-shrink: 0; display: block; filter: drop-shadow(0 6px 16px #e5091440); transform: rotate(0deg); transition: transform .5s cubic-bezier(.2, .8, .2, 1), filter .4s; }
+.logo-mark__beam { transition: opacity .4s; }
+.logo__word { font-family: var(--font-heading); font-weight: 800; font-size: 1.45rem; letter-spacing: -.065em; }
+.logo__word em { font-style: normal; color: #e50914; }
+.logo__sub { font-size: .52rem; font-weight: 600; letter-spacing: .32em; text-transform: uppercase; color: #a3a3ae; border-left: 1px solid #ffffff26; padding-left: 11px; }
+
+a:hover .logo-mark, a:focus-visible .logo-mark { transform: rotate(-8deg) scale(1.04); filter: drop-shadow(0 8px 22px #e5091470); }
+a:hover .logo-mark__beam { opacity: .75; }
+
+.logo--lg { gap: 16px; }
+.logo--lg .logo-mark { width: 64px; height: 64px; }
+.logo--lg .logo__word { font-size: 2.6rem; }
+.logo--lg .logo__sub { font-size: .62rem; padding-left: 16px; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .navbar .logo-mark { animation: logo-mark-enter 1s cubic-bezier(.2, .8, .2, 1) both; }
+}
+@keyframes logo-mark-enter { from { opacity: 0; transform: translateY(14px) rotate(-14deg); } to { opacity: 1; transform: none; } }
+
+@media (max-width: 480px) {
+  .navbar .logo__sub { display: none; }
+  .logo--lg { flex-wrap: wrap; justify-content: center; }
+}

@@ -1,84 +1,13 @@
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { IconCheck, IconTelegram, IconWhatsApp, IconMail, IconTv, IconArrowRight } from '../components/Icons'
 import ContentBrowser from '../components/ContentBrowser'
+import Dialog from '../components/Dialog'
+import PlanComparison from '../components/PlanComparison'
+import DataState from '../components/DataState'
+import useTMDB from '../hooks/useTMDB'
+import { imageUrl } from '../lib/tmdb'
+import { PLANS } from '../lib/plans'
 import './SubscriptionsPage.css'
-
-const PLANS = [
-  {
-    id:      'basic',
-    name:    'Basic',
-    monthly: 15,
-    annual:  150,
-    annualSave: '17%',
-    badge:   null,
-    features: [
-      'Full HD 1080p streaming',
-      '1 simultaneous screen',
-      '5,000+ channels',
-      'VOD library access',
-      'Email support',
-    ],
-    cta: 'Order Basic',
-    highlighted: false,
-  },
-  {
-    id:      'plus',
-    name:    'Plus',
-    monthly: 25,
-    annual:  240,
-    annualSave: '20%',
-    badge:   null,
-    features: [
-      '4K Ultra HD streaming',
-      '2 simultaneous screens',
-      '10,000+ channels',
-      'VOD library access',
-      'Priority support',
-      'EPG TV guide',
-    ],
-    cta: 'Order Plus',
-    highlighted: false,
-  },
-  {
-    id:      'premium',
-    name:    'Premium',
-    monthly: 40,
-    annual:  380,
-    annualSave: '21%',
-    badge:   'Most Popular',
-    features: [
-      '4K Ultra HD & HDR',
-      '3 simultaneous screens',
-      '15,000+ channels',
-      'Full VOD library',
-      '24/7 Priority support',
-      'EPG TV guide',
-      'Catch-up TV',
-    ],
-    cta: 'Order Premium',
-    highlighted: true,
-  },
-  {
-    id:      'ultimate',
-    name:    'Ultimate',
-    monthly: 60,
-    annual:  576,
-    annualSave: '20%',
-    badge:   'Best Value',
-    features: [
-      '4K Ultra HD & HDR',
-      '5 simultaneous screens',
-      '20,000+ channels',
-      'Full VOD library',
-      '24/7 VIP support',
-      'EPG TV guide',
-      'Catch-up TV',
-      'Multi-device login',
-    ],
-    cta: 'Order Ultimate',
-    highlighted: false,
-  },
-]
 
 const FEATURES = [
   { Icon: IconTv,      title: '4K Ultra HD',      desc: 'Stunning clarity on any screen, from phones to 85" TVs.' },
@@ -120,11 +49,8 @@ function OrderModal({ plan, billing, onClose }) {
   const msg = encodeURIComponent(`Hi! I'd like to order the ${plan.name} plan ($${price}${period}) for NAT Entertainment streaming. Please activate my subscription.`)
 
   return (
-    <div className="subs__modal-overlay" role="dialog" aria-modal="true" aria-label="Order subscription">
+    <Dialog title={`Order ${plan.name}`} onClose={onClose} className="order-dialog">
       <div className="subs__modal glass-strong" onClick={e => e.stopPropagation()}>
-        <button className="subs__modal-close" onClick={onClose} aria-label="Close">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
-        </button>
 
         <div className="subs__modal-header">
           <h2 className="subs__modal-title">
@@ -166,7 +92,7 @@ function OrderModal({ plan, billing, onClose }) {
             <IconArrowRight size={16} />
           </a>
           <a
-            href={`mailto:info@natentertainment.org?subject=Subscription Order - ${plan.name} Plan&body=${decodeURIComponent(msg)}`}
+            href={`mailto:info@natentertainment.org?subject=${encodeURIComponent(`Subscription Order - ${plan.name} Plan`)}&body=${msg}`}
             className="subs__modal-channel subs__modal-channel--email"
           >
             <IconMail size={22} />
@@ -178,7 +104,7 @@ function OrderModal({ plan, billing, onClose }) {
           </a>
         </div>
       </div>
-    </div>
+    </Dialog>
   )
 }
 
@@ -186,27 +112,9 @@ export default function SubscriptionsPage() {
   const [billing, setBilling]     = useState('monthly')
   const [openFaq, setOpenFaq]     = useState(null)
   const [orderPlan, setOrderPlan] = useState(null)
-  const [heroBg, setHeroBg]       = useState(null)
-  const [heroPosters, setHeroPosters] = useState([])
-
-  useEffect(() => {
-    const TMDB_KEY = '37586a948665ac34688279aea2a69dc2'
-    // Fetch a dramatic backdrop for the hero background + small posters strip
-    fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${TMDB_KEY}&language=en-US`)
-      .then(r => r.json())
-      .then(d => {
-        const results = (d.results || []).filter(i => i.backdrop_path && i.poster_path)
-        if (results.length) {
-          // Pick item with highest vote_average as hero bg
-          const featured = [...results].sort((a, b) => b.vote_average - a.vote_average)[0]
-          setHeroBg(`https://image.tmdb.org/t/p/w1280${featured.backdrop_path}`)
-          // Pick 6 random posters for the strip
-          const shuffled = results.filter(i => i.poster_path).sort(() => Math.random() - 0.5)
-          setHeroPosters(shuffled.slice(0, 6))
-        }
-      })
-      .catch(() => {})
-  }, [])
+  const hero = useTMDB('/trending/all/week')
+  const heroPosters = (hero.data?.results || []).filter(item => ['movie', 'tv'].includes(item.media_type) && item.poster_path).slice(0, 6)
+  const heroBg = imageUrl(heroPosters.find(item => item.backdrop_path)?.backdrop_path, 'w1280')
 
   return (
     <div className="subs">
@@ -250,24 +158,22 @@ export default function SubscriptionsPage() {
           {heroPosters.length > 0 && (
             <div className="subs__hero-posters animate-fade-in-up delay-400" aria-hidden="true">
               {heroPosters.map(item => (
-                <div key={item.id} className="subs__hero-poster">
+                <div key={`${item.media_type}-${item.id}`} className="subs__hero-poster">
                   <img
                     src={`https://image.tmdb.org/t/p/w185${item.poster_path}`}
                     alt=""
                     loading="lazy"
                     decoding="async"
+                    onError={event => { event.currentTarget.style.visibility = 'hidden' }}
                   />
                   <div className="subs__hero-poster-overlay">
                     <span>★ {item.vote_average?.toFixed(1)}</span>
                   </div>
                 </div>
               ))}
-              <div className="subs__hero-posters-more">
-                <span>+20,000</span>
-                <span>more titles</span>
-              </div>
             </div>
           )}
+          {hero.error && <DataState error={hero.error} retry={hero.retry} compact />}
         </div>
       </section>
 
@@ -327,6 +233,7 @@ export default function SubscriptionsPage() {
             ))}
           </div>
 
+          <PlanComparison billing={billing} onOrder={setOrderPlan} />
           <div className="subs__order-note">
             <div className="subs__order-note-inner glass">
               <p>
@@ -350,12 +257,12 @@ export default function SubscriptionsPage() {
       <section className="subs__browser section-sm" aria-label="Content library">
         <div className="container">
           <div className="text-center mb-xl">
-            <p className="section-eyebrow">What You Can Watch</p>
+            <p className="section-eyebrow">Find Your Next Favourite</p>
             <h2 className="section-title">
               Explore the <span className="text-gradient">Library</span>
             </h2>
             <p className="section-subtitle">
-              Thousands of movies, series, and live channels — all available the moment you subscribe.
+              Explore movies and series with TMDB. Contact our team to confirm which titles are available on your plan.
             </p>
           </div>
           <ContentBrowser />
@@ -404,7 +311,7 @@ export default function SubscriptionsPage() {
                   {item.q}
                   <span className="subs__faq-chevron" aria-hidden="true">{openFaq === i ? '−' : '+'}</span>
                 </button>
-                <div className="subs__faq-answer" role="region" aria-labelledby={`faq-q-${i}`}>
+                <div className="subs__faq-answer" role="region" aria-labelledby={`faq-q-${i}`} hidden={openFaq !== i}>
                   <p>{item.a}</p>
                 </div>
               </div>

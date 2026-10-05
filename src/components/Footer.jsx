@@ -1,21 +1,24 @@
 import { Link } from 'react-router-dom'
 import { IconTelegram, IconWhatsApp, IconMail } from './Icons'
+import WaveDivider from './WaveDivider'
+import Logo from './Logo'
 import './Footer.css'
 
 const FOOTER_LINKS = {
-  'Services': [
+  'Explore': [
+    { to: '/discover', label: 'Movies & Series' },
+    { to: '/watchlist', label: 'My Watchlist' },
+  ],
+  'Streaming': [
     { to: '/subscriptions', label: 'IPTV Subscriptions' },
     { to: '/reseller',      label: 'Reseller Program'  },
-    { to: '/services',      label: 'Web Design'        },
-  ],
-  'Company': [
-    { to: '/about', label: 'About Nathan' },
-    { to: '/about', label: 'Contact'      },
   ],
 }
 
 export default function Footer() {
   return (
+    <>
+    <WaveDivider to="#101116" />
     <footer className="footer" role="contentinfo">
       <div className="footer__glow" aria-hidden="true" />
       <div className="container">
@@ -23,10 +26,10 @@ export default function Footer() {
           {/* Brand */}
           <div className="footer__brand">
             <Link to="/" className="footer__logo" aria-label="NAT Entertainment Home">
-              <img src="/nat_logo.png" alt="NAT Entertainment" className="footer__logo-img" />
+              <Logo />
             </Link>
             <p className="footer__tagline">
-              Premium IPTV streaming, reseller partnerships, and professional web development — all under one roof, built by a Computer Science engineer.
+              Premium IPTV streaming and reseller partnerships, with setup and support from a real person.
             </p>
 
             {/* Real contact channels */}
@@ -87,10 +90,19 @@ export default function Footer() {
             © {new Date().getFullYear()} NAT Entertainment &amp; Services. All rights reserved.
           </p>
           <p className="footer__copy footer__copy--right">
-            Built by Natnael — NAT Entertainment
+            Built by{' '}
+            <a
+              href="https://daat-three.vercel.app/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="footer__credit"
+            >
+              Daat.tech <span aria-hidden="true">↗</span>
+            </a>
           </p>
         </div>
       </div>
     </footer>
+    </>
   )
 }

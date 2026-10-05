@@ -1,14 +1,16 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
   <defs>
-    <linearGradient id="n-grad" x1="0%" y1="0%" x2="100%" y2="100%">
-      <stop offset="0%" stop-color="#FF3B47" />
-      <stop offset="100%" stop-color="#B80710" />
+    <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ff3b47"/>
+      <stop offset="1" stop-color="#a5060f"/>
     </linearGradient>
-    <filter id="glow" x="-15%" y="-15%" width="130%" height="130%">
-      <feDropShadow dx="0" dy="8" stdDeviation="12" flood-color="#E50914" flood-opacity="0.4" />
-    </filter>
+    <linearGradient id="beam" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#fff" stop-opacity=".55"/>
+    </linearGradient>
   </defs>
-  <rect width="512" height="512" rx="110" fill="#0B0C10" />
-  <!-- A beautiful modern geometric 'N' Logo -->
-  <path d="M140 100h70v200L302 100h70v312h-70V212L210 412h-70z" fill="url(#n-grad)" filter="url(#glow)" />
+  <rect width="64" height="64" rx="16" fill="url(#tile)"/>
+  <rect x="16" y="16" width="8.5" height="32" rx="1.5" fill="#fff"/>
+  <path d="M24.5 16 48 48H34L24.5 34z" fill="url(#beam)"/>
+  <path d="M39.5 16H48v26l-8.5-11.6z" fill="#fff" fill-opacity=".5"/>
 </svg>

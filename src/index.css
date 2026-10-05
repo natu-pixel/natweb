@@ -8,10 +8,10 @@
 :root {
   /* Colors */
   --color-bg:              #0B0C10;
-  --color-surface:         #1F2833;
-  --color-surface-2:       #2A323D;
-  --color-surface-3:       #353F4C;
-  --color-border:          rgba(229, 9, 20, 0.15);
+  --color-surface:         #15161C;
+  --color-surface-2:       #202128;
+  --color-surface-3:       #2C2D36;
+  --color-border:          rgba(255, 255, 255, 0.12);
   --color-border-hover:    rgba(229, 9, 20, 0.4);
 
   --color-purple:          #E50914; /* Cinema Red */
@@ -33,7 +33,7 @@
   /* Gradients */
   --grad-purple:     linear-gradient(135deg, #E50914 0%, #B80710 100%);
   --grad-gold:       linear-gradient(135deg, #E50914 0%, #FF8F94 100%);
-  --grad-dark:       linear-gradient(180deg, #1F2833 0%, #0B0C10 100%);
+  --grad-dark:       linear-gradient(180deg, #15161C 0%, #0B0C10 100%);
   --grad-hero:       linear-gradient(135deg, rgba(229, 9, 20, 0.15) 0%, rgba(229, 9, 20, 0.08) 50%, rgba(255, 143, 148, 0.05) 100%);
   --grad-card:       linear-gradient(135deg, rgba(229, 9, 20, 0.08) 0%, rgba(255, 143, 148, 0.04) 100%);
 

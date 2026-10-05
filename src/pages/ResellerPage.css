@@ -4,7 +4,7 @@
 .reseller__hero { position: relative; }
 
 .reseller__hero-glow {
-  background: radial-gradient(ellipse at 50% 60%, rgba(212,175,55,0.14) 0%, transparent 70%) !important;
+  background: radial-gradient(ellipse at 50% 60%, rgba(229, 9, 20,0.14) 0%, transparent 70%) !important;
 }
 
 /* ── Explainer ────────────────────────────── */
@@ -28,7 +28,7 @@
   width: 56px;
   height: 56px;
   border-radius: var(--radius-md);
-  background: rgba(212,175,55,0.12);
+  background: rgba(229, 9, 20,0.12);
   color: var(--color-gold-light);
   display: flex;
   align-items: center;
@@ -50,8 +50,8 @@
 }
 
 .reseller__explainer-example {
-  background: rgba(212,175,55,0.07);
-  border: 1px solid rgba(212,175,55,0.2);
+  background: rgba(229, 9, 20,0.07);
+  border: 1px solid rgba(229, 9, 20,0.2);
   border-radius: var(--radius-lg);
   padding: var(--space-md) var(--space-lg);
   min-width: 260px;
@@ -98,13 +98,13 @@
 
 .reseller__pkg-card--hot {
   border-color: var(--color-gold);
-  background: linear-gradient(135deg, rgba(212,175,55,0.05) 0%, var(--color-surface) 100%);
-  box-shadow: 0 0 40px rgba(212,175,55,0.12);
+  background: linear-gradient(135deg, rgba(229, 9, 20,0.05) 0%, var(--color-surface) 100%);
+  box-shadow: 0 0 40px rgba(229, 9, 20,0.12);
 }
 
 .reseller__pkg-card--hot:hover {
   border-color: var(--color-gold-light);
-  box-shadow: 0 20px 60px rgba(212,175,55,0.2);
+  box-shadow: 0 20px 60px rgba(229, 9, 20,0.2);
 }
 
 .reseller__pkg-badge {
@@ -248,7 +248,7 @@
 }
 
 .reseller__calc-header {
-  background: rgba(212,175,55,0.08);
+  background: rgba(229, 9, 20,0.08);
   border-bottom: 1px solid var(--color-border);
   font-size: 0.75rem;
   font-weight: 700;
@@ -330,7 +330,7 @@
   right: -32px;
   width: 64px;
   height: 2px;
-  background: linear-gradient(90deg, rgba(212,175,55,0.5), transparent);
+  background: linear-gradient(90deg, rgba(229, 9, 20,0.5), transparent);
   z-index: 1;
 }
 
@@ -361,15 +361,15 @@
 
 .reseller__benefit-card:hover {
   transform: translateY(-4px);
-  border-color: rgba(212,175,55,0.3);
-  box-shadow: 0 12px 40px rgba(212,175,55,0.08);
+  border-color: rgba(229, 9, 20,0.3);
+  box-shadow: 0 12px 40px rgba(229, 9, 20,0.08);
 }
 
 .reseller__benefit-icon {
   width: 48px;
   height: 48px;
   border-radius: var(--radius-md);
-  background: rgba(212,175,55,0.1);
+  background: rgba(229, 9, 20,0.1);
   color: var(--color-gold-light);
   display: flex;
   align-items: center;
@@ -423,7 +423,11 @@
   display: flex;
   flex-direction: column;
   gap: 2px;
+  min-width: 0;
+  overflow-wrap: anywhere;
 }
+.reseller__contact-btn svg { flex-shrink: 0; }
+.reseller__contact-text, .reseller__contact-channels { min-width: 0; }
 
 .reseller__contact-btn div strong { font-size: 0.92rem; font-weight: 600; }
 .reseller__contact-btn div span   { font-size: 0.8rem; color: var(--color-text-muted); }
@@ -448,11 +452,11 @@
 .reseller__contact-btn--whatsapp:hover { background: rgba(37, 211, 102, 0.12); border-color: rgba(37, 211, 102, 0.4); }
 
 .reseller__contact-btn--email {
-  background: rgba(212, 175, 55, 0.06);
-  border-color: rgba(212, 175, 55, 0.2);
+  background: rgba(229, 9, 20, 0.06);
+  border-color: rgba(229, 9, 20, 0.2);
   color: var(--color-gold-light);
 }
-.reseller__contact-btn--email:hover { background: rgba(212, 175, 55, 0.12); border-color: rgba(212, 175, 55, 0.4); }
+.reseller__contact-btn--email:hover { background: rgba(229, 9, 20, 0.12); border-color: rgba(229, 9, 20, 0.4); }
 
 /* ── Responsive ───────────────────────────── */
 @media (max-width: 1100px) {
@@ -472,6 +476,10 @@
 }
 
 @media (max-width: 640px) {
+  .reseller__explainer-inner { grid-template-columns: minmax(0, 1fr); padding: 24px; gap: 20px; }
+  .reseller__explainer-example { min-width: 0; padding: 16px; }
+  .reseller__contact-inner { grid-template-columns: minmax(0, 1fr); padding: 24px; gap: 28px; }
+  .reseller__contact-btn { padding: 14px; gap: 10px; }
   .reseller__steps-grid { grid-template-columns: 1fr; }
   .reseller__calc-header,
   .reseller__calc-row   { grid-template-columns: 1fr 1fr 1fr; padding: var(--space-sm) var(--space-md); }

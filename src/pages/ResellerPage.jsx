@@ -101,7 +101,7 @@ export default function ResellerPage() {
   const formRef = useRef(null)
 
   function scrollToPackages() {
-    document.getElementById('reseller-packages')?.scrollIntoView({ behavior: 'smooth' })
+    document.getElementById('reseller-packages')?.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth' })
   }
 
   function buildOrderMsg(pkg) {

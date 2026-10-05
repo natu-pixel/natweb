@@ -32,8 +32,8 @@
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse at 30% 40%, rgba(123,63,228,0.15) 0%, transparent 60%),
-    radial-gradient(ellipse at 70% 60%, rgba(212,175,55,0.08) 0%, transparent 50%),
+    radial-gradient(ellipse at 30% 40%, rgba(229, 9, 20,0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 60%, rgba(229, 9, 20,0.08) 0%, transparent 50%),
     var(--color-bg);
 }
 
@@ -89,7 +89,7 @@
 
 .subs__hero-poster:hover {
   transform: translateY(-6px) scale(1.05);
-  box-shadow: 0 8px 30px rgba(123,63,228,0.3);
+  box-shadow: 0 8px 30px rgba(229, 9, 20,0.3);
   z-index: 2;
 }
 
@@ -128,7 +128,7 @@
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background: rgba(123,63,228,0.08);
+  background: rgba(229, 9, 20,0.08);
   color: var(--color-purple-light);
   font-size: 0.8rem;
   font-weight: 600;
@@ -158,7 +158,7 @@
   top: 0; left: 50%;
   transform: translateX(-50%);
   width: 800px; height: 400px;
-  background: radial-gradient(ellipse, rgba(123,63,228,0.12) 0%, transparent 70%);
+  background: radial-gradient(ellipse, rgba(229, 9, 20,0.12) 0%, transparent 70%);
   pointer-events: none;
 }
 
@@ -201,16 +201,16 @@
 .subs__toggle-btn--active {
   background: var(--grad-purple);
   color: #fff;
-  box-shadow: 0 2px 12px rgba(123,63,228,0.35);
+  box-shadow: 0 2px 12px rgba(229, 9, 20,0.35);
 }
 
 .subs__toggle-save {
   font-size: 0.72rem;
-  background: rgba(212,175,55,0.2);
+  background: rgba(229, 9, 20,0.2);
   color: var(--color-gold-light);
   padding: 2px 8px;
   border-radius: var(--radius-pill);
-  border: 1px solid rgba(212,175,55,0.3);
+  border: 1px solid rgba(229, 9, 20,0.3);
 }
 
 /* ── Plans Grid ─────────────────────────────── */
@@ -629,14 +629,14 @@
 }
 
 .subs__modal-channel--email {
-  background: rgba(212, 175, 55, 0.08);
-  border-color: rgba(212, 175, 55, 0.25);
+  background: rgba(229, 9, 20, 0.08);
+  border-color: rgba(229, 9, 20, 0.25);
   color: var(--color-gold-light);
 }
 
 .subs__modal-channel--email:hover {
-  background: rgba(212, 175, 55, 0.15);
-  border-color: rgba(212, 175, 55, 0.5);
+  background: rgba(229, 9, 20, 0.15);
+  border-color: rgba(229, 9, 20, 0.5);
 }
 
 /* ── Responsive ─────────────────────────────── */
